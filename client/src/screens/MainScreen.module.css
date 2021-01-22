@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.mainContainer {
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+}
+
+.lightContainer {
+	position: absolute;
+	left: 50%;
+	top: 3%;
+	transform: translate(-50%, -50%);
+}
+.switchContainer {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.lightImg {
+	height: 10vh;
+}
+
+.switchButton {
+	border: none;
+}
+.switchButton:active {
+	border: none;
+}
