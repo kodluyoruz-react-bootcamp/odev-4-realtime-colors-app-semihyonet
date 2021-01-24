@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import MainScreen from "./screens/MainScreen";
 import { LightProvider } from "./context/LightContext";

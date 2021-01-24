@@ -1,7 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./MainScreen.module.css";
 
 import LightContext from "../context/LightContext";
+
+import {
+	initSocket,
+	disconnectSocket,
+	subscribeToPeopleNum,
+	subscribeInitialState,
+	subscribeNewState,
+} from "../socket/socketMethods";
+
+import PeopleCount from "../components/PeopleCount/PeopleCount";
 
 import light from "../assets/pic/light.png";
 import switchy from "../assets/pic/switch.png";
@@ -15,8 +25,27 @@ const MainScreen = () => {
 		redLight,
 		greenLight,
 		blueLight,
+		setPeople,
+		setInitialState,
 	} = useContext(LightContext);
-	console.log(color);
+
+	useEffect(() => {
+		initSocket();
+		subscribeToPeopleNum((a) => {
+			setPeople(a);
+		});
+		subscribeInitialState((a) => {
+			setInitialState(a);
+		});
+
+		subscribeNewState((a) => {
+			setInitialState(a);
+		});
+		return () => {
+			disconnectSocket();
+		};
+	}, []);
+
 	return (
 		<div
 			style={{
@@ -24,6 +53,7 @@ const MainScreen = () => {
 			}}
 			className={styles.mainContainer}
 		>
+			<PeopleCount />
 			<div className={styles.lightContainer}>
 				<img
 					className={styles.lightImg}
